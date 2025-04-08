@@ -67,31 +67,33 @@ app.post('/initUser', async (req, res) => {
  * Starts mining for a user, generates a unique 10-digit daily code, and resets daily bonus fields.
  */
 app.post('/toggleMining', async (req, res) => {
-  try {
-    const { telegramId } = req.body;
-    if (!telegramId) return res.status(400).json({ error: "telegramId required" });
-    
-    let user = await User.findOne({ telegramId });
-    if (!user) return res.status(404).json({ error: "User not found" });
-    
-    if (user.miningActive) {
-      return res.status(400).json({ message: "Mining already active." });
+    try {
+      const { telegramId } = req.body;
+      console.log("Received telegramId:", telegramId);  // Add this line to log the request
+      if (!telegramId) return res.status(400).json({ error: "telegramId required" });
+  
+      let user = await User.findOne({ telegramId });
+      if (!user) return res.status(404).json({ error: "User not found" });
+      console.log("User found:", user);  // Add this line to log the user found in DB
+  
+      if (user.miningActive) {
+        return res.status(400).json({ message: "Mining already active." });
+      }
+  
+      user.miningActive = true;
+      user.dailyCode = generateDailyCode();
+      user.dailyCodeGeneratedAt = new Date();
+      user.codeSubmissions = 0;
+      user.hasSubmittedBonus = false;
+      await user.save();
+  
+      res.json({ message: "Mining started", user });
+    } catch (err) {
+      console.error("Error in toggleMining:", err);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-    
-    user.miningActive = true;
-    // Generate a daily code and record the generation time.
-    user.dailyCode = generateDailyCode();
-    user.dailyCodeGeneratedAt = new Date();
-    user.codeSubmissions = 0;
-    user.hasSubmittedBonus = false;
-    await user.save();
-    
-    res.json({ message: "Mining started", user });
-  } catch (err) {
-    console.error("Error in toggleMining:", err);
-    res.status(500).json({ error: "Internal Server Error" });
-  }
-});
+  });
+  
 
 /**
  * POST /submitCode

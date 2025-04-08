@@ -18,6 +18,7 @@ function initUser() {
   })
   .then(resp => resp.json())
   .then(user => {
+    console.log(user);  // Add this line to log the returned user
     updateUserUI(user);
   })
   .catch(err => console.error("Error initializing user:", err));
