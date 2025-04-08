@@ -1,0 +1,209 @@
+:root {
+  --tg-theme-bg-color: #000000;
+  --tg-theme-text-color: #ffffff;
+  --tg-theme-secondary-bg-color: #1a1a1a;
+  --tg-theme-hint-color: #8e8e93;
+  --tg-theme-link-color: #007AFF;
+  --tg-theme-button-color: #007AFF;
+  --tg-theme-button-text-color: #ffffff;
+  --tg-border-color: rgba(255, 255, 255, 0.1);
+  --tg-card-border-radius: 14px;
+  --tg-box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Base Styles */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+  background-color: var(--tg-theme-bg-color);
+  color: var(--tg-theme-text-color);
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--tg-theme-bg-color);
+  padding: 20px 16px;
+  text-align: center;
+  border-bottom: 1px solid var(--tg-border-color);
+  z-index: 100;
+}
+
+.logo {
+  font-size: 1.8em;
+  font-weight: bold;
+  margin: 0;
+}
+
+.header-info {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--tg-border-color);
+  font-size: 0.9em;
+  color: var(--tg-theme-hint-color);
+}
+
+/* Main Container */
+.container {
+  margin-top: 100px; /* leaves space for the fixed header */
+  padding: 16px;
+}
+
+/* Card Styles */
+.card {
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-card-border-radius);
+  padding: 20px;
+  margin-bottom: 16px;
+  box-shadow: var(--tg-box-shadow);
+  border: 1px solid var(--tg-border-color);
+}
+
+/* Info Row */
+.stats-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+  font-size: 0.9em;
+  color: var(--tg-theme-hint-color);
+}
+
+/* Button */
+.button {
+  width: 100%;
+  padding: 16px;
+  margin-top: 20px;
+  border-radius: 12px;
+  background-color: var(--tg-theme-button-color);
+  color: var(--tg-theme-button-text-color);
+  text-align: center;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: opacity 0.2s ease-in-out;
+  font-size: 0.9em;
+}
+
+.button:active {
+  opacity: 0.8;
+}
+
+/* Countdown Timer */
+.countdown {
+  font-size: 0.8em;
+  color: var(--tg-theme-hint-color);
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--tg-theme-secondary-bg-color);
+  display: flex;
+  justify-content: space-around;
+  padding: 12px 0;
+  border-top: 1px solid var(--tg-border-color);
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--tg-theme-hint-color);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+
+.nav-item.active {
+  color: var(--tg-theme-button-color);
+}
+
+.nav-item i {
+  font-size: 1.2em;
+  margin-bottom: 4px;
+}
+
+.nav-item span {
+  font-size: 0.7em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Leaderboard Styles */
+.leaderboard {
+  background-color: var(--tg-theme-secondary-bg-color);
+  border-radius: var(--tg-card-border-radius);
+  padding: 20px;
+  box-shadow: var(--tg-box-shadow);
+  border: 1px solid var(--tg-border-color);
+}
+
+.leaderboard h2 {
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.leaderboard-table {
+  width: 100%;
+}
+
+.leaderboard-header {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+  border-bottom: 1px solid var(--tg-border-color);
+  padding-bottom: 8px;
+  margin-bottom: 8px;
+}
+
+.leaderboard-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--tg-border-color);
+}
+
+.rank {
+  width: 10%;
+  text-align: center;
+}
+
+.username {
+  width: 60%;
+  text-align: center;
+}
+
+.balance {
+  width: 30%;
+  text-align: center;
+}
+
+/* Add responsive behavior for mobile */
+@media (max-width: 600px) {
+  .leaderboard-header,
+  .leaderboard-item {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .rank,
+  .username,
+  .balance {
+    width: 100%;
+    text-align: center;
+  }
+}

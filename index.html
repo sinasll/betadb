@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>$BLACK</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Firebase scripts are still loaded in your original design, but are not used in this backend version -->
+</head>
+<body>
+  
+  <!-- Header with only the logo -->
+  <div class="header">
+    <h1 class="logo">$BLACK</h1>
+  </div>
+
+  <!-- Main Content Container -->
+  <div class="container">
+    <!-- Global Stats Card -->
+    <div class="card global-stats">
+      <div class="stats-row">
+        <div>Total Mined</div>
+        <div><span id="mined">0.00</span> / 125,000,000 $BLACK</div>
+      </div>
+    </div>
+
+    <!-- User Info Card -->
+    <div class="card">
+      <h2 class="card-title">User</h2>
+      <div class="stats-row">
+        <div>Username</div>
+        <div>@<span id="username">loading...</span></div>
+      </div>
+      <div class="stats-row">
+        <div>Balance</div>
+        <div><span id="balance">0.00</span> $BLACK</div>
+      </div>
+      <div class="stats-row">
+        <div>Mining Power</div>
+        <div><span id="power">1.0</span>x</div>
+      </div>
+      <div class="stats-row">
+        <div>Your Daily Code</div>
+        <div><span id="dailyCode">Not generated</span></div>
+      </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <button class="button" id="mineButton">Start Mining</button>
+    
+    <!-- Submit Code Section -->
+    <div class="card">
+      <h2 class="card-title">Submit a Code</h2>
+      <input type="text" id="submitCodeInput" placeholder="Enter 10-digit code">
+      <button class="button" id="submitCodeButton">Submit Code</button>
+    </div>
+
+    <!-- Countdown Timer -->
+    <div class="countdown" id="countdown">Daily reset in 00:00:00</div>
+  </div>
+
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="nav-item active" data-view="mine">
+      <i class="fas fa-hard-hat"></i>
+      <span>Mine</span>
+    </div>
+    <a href="leaderboard.html">
+      <div class="nav-item" data-view="leaderboard">
+        <i class="fas fa-trophy"></i>
+        <span>Leaderboard</span>
+      </div>
+    </a>
+    <div class="nav-item" data-view="earn">
+      <i class="fas fa-gem"></i>
+      <span>Earn</span>
+    </div>
+    <div class="nav-item" data-view="friends">
+      <i class="fas fa-users"></i>
+      <span>Friends</span>
+    </div>
+  </nav>
+
+  <script src="app.js"></script>
+</body>
+</html>

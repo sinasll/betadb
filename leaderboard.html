@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Leaderboard - $BLACK</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+</head>
+<body>
+  <!-- Header with only the logo -->
+  <div class="header">
+    <h1 class="logo">$BLACK</h1>
+  </div>
+
+  <!-- Leaderboard Content -->
+  <div class="container">
+    <div class="leaderboard">
+      <h2>Leaderboard</h2>
+      <div class="leaderboard-table">
+        <div class="leaderboard-header">
+          <div class="rank">Rank</div>
+          <div class="username">Username</div>
+          <div class="balance">Balance ($BLACK)</div>
+        </div>
+        <div id="leaderboardList" class="leaderboard-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bottom Navigation -->
+<nav class="bottom-nav">
+  <a href="index.html">
+    <div class="nav-item" data-view="mine">
+      <i class="fas fa-hard-hat"></i>
+      <span>Mine</span>
+    </div>
+  </a>
+  <a href="leaderboard.html">
+    <div class="nav-item active" data-view="leaderboard">
+      <i class="fas fa-trophy"></i>
+      <span>Leaderboard</span>
+    </div>
+  </a>
+  <a href="#">
+    <div class="nav-item" data-view="earn">
+      <i class="fas fa-gem"></i>
+      <span>Earn</span>
+    </div>
+  </a>
+  <a href="#">
+    <div class="nav-item" data-view="friends">
+      <i class="fas fa-users"></i>
+      <span>Friends</span>
+    </div>
+  </a>
+</nav>
+
+
+  <script>
+    // Firebase Configuration
+    const firebaseConfig = {
+      apiKey: "AIzaSyAzXSCn_QL2XeyRZD71By443sl4wOtXf2Y",
+      authDomain: "pipcore-8844f.firebaseapp.com",
+      projectId: "pipcore-8844f",
+      storageBucket: "pipcore-8844f.appspot.com",
+      messagingSenderId: "921115337984",
+      appId: "1:921115337984:web:17161651342ad78017bfe5"
+    };
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.firestore();
+
+    // Function to Fetch and Display Leaderboard Data
+    async function getLeaderboard() {
+      const leaderboardRef = db.collection('users');
+      const snapshot = await leaderboardRef.orderBy('balance', 'desc').limit(10).get();
+
+      const leaderboardList = document.getElementById('leaderboardList');
+      leaderboardList.innerHTML = ''; // Clear the list first
+
+      let rank = 1;
+      snapshot.forEach((doc) => {
+        const data = doc.data();
+        const username = data.username || `user_${data.telegramId}`;
+        const balance = data.balance.toFixed(2);
+        const listItem = document.createElement('div');
+        listItem.className = 'leaderboard-item';
+        listItem.innerHTML = `
+          <div class="rank">${rank}</div>
+          <div class="username">@${username}</div>
+          <div class="balance">${balance}</div>
+        `;
+        leaderboardList.appendChild(listItem);
+        rank++;
+      });
+    }
+
+    // Call getLeaderboard when the page is loaded
+    document.addEventListener('DOMContentLoaded', getLeaderboard);
+  </script>
+</body>
+</html>
