@@ -40,6 +40,7 @@ document.getElementById('mineButton').addEventListener('click', () => {
   .catch(err => console.error("Error toggling mining:", err));
 });
 
+
 // Submit a code.
 document.getElementById('submitCodeButton').addEventListener('click', () => {
   const codeInput = document.getElementById('submitCodeInput');
